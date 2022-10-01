@@ -1,0 +1,13 @@
+{
+    "address": "0.0.0.0:90",
+    "CORS":{
+        "enabled": true,
+        "allowedOrigins": ["*"],
+        "allowedHeaders": ["*"],
+        "allowedMethods": ["*"]
+    },
+    "certificates":{
+        "public": "certs/app.rsa.pub",
+        "private": "certs/app.rsa"
+    }
+}
