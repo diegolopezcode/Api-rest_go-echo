@@ -5,6 +5,9 @@ import (
 
 	"github.com/DiegoLopez-ing/api_rest/configs"
 	"github.com/DiegoLopez-ing/api_rest/database"
+	"github.com/DiegoLopez-ing/api_rest/handlers"
+	"github.com/DiegoLopez-ing/api_rest/repos"
+	"github.com/DiegoLopez-ing/api_rest/services"
 	"gorm.io/gorm"
 )
 
@@ -13,13 +16,14 @@ var ones sync.Once
 func LoadConfig(configFilepath string) error {
 	var errr error
 	ones.Do(func() {
-		if conf, err := configs.LoadDbConfigs(configFilepath); err != nil {
+		if conf, err := configs.LoadDbConfig(configFilepath); err != nil {
 			errr = err
 			return
 		} else {
-			con, er = database.GetDBConnextion(conf)
+			con, er := database.GetDBConnection(conf)
 			if err != nil {
 				errr = er
+
 				return
 			}
 			initRepository(con)

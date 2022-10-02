@@ -1,6 +1,11 @@
 package injectors
 
-import "gorm.io/gorm"
+import (
+	"github.com/DiegoLopez-ing/api_rest/handlers"
+	"github.com/DiegoLopez-ing/api_rest/repos"
+	"github.com/DiegoLopez-ing/api_rest/services"
+	"gorm.io/gorm"
+)
 
 var (
 	Connection *gorm.DB
