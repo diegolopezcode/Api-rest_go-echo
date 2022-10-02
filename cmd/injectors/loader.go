@@ -5,12 +5,9 @@ import (
 
 	"github.com/DiegoLopez-ing/api_rest/configs"
 	"github.com/DiegoLopez-ing/api_rest/database"
-<<<<<<< HEAD
-=======
 	"github.com/DiegoLopez-ing/api_rest/handlers"
 	"github.com/DiegoLopez-ing/api_rest/repos"
 	"github.com/DiegoLopez-ing/api_rest/services"
->>>>>>> 34b956835237401f626c95762799cba11afd2588
 	"gorm.io/gorm"
 )
 
