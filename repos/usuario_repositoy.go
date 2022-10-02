@@ -3,7 +3,7 @@ package repos
 import (
 	"errors"
 
-	"github.com/Diegolopez-ing/api_rest/models"
+	"github.com/DiegoLopez-ing/api_rest/models"
 	"gorm.io/gorm"
 )
 

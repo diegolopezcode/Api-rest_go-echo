@@ -3,7 +3,7 @@ package configs
 import (
 	"encoding/json"
 	"fmt"
-	"os"
+	"io/ioutil"
 )
 
 type Cors struct {
@@ -25,9 +25,9 @@ type ServiceConfigs struct {
 
 type DbConfigs struct {
 	Host     string `json:"host"`
-	Port     string `json:"port"`
+	Port     uint   `json:"port"`
 	UserDb   string `json:"user_db"`
-	Password string `json:"password"`
+	Password uint   `json:"password"`
 	DbName   string `json:"db_name"`
 }
 
@@ -37,18 +37,36 @@ type Config struct {
 }
 
 func (d *DbConfigs) GetConnectionString() string {
-	cadena := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable TimeZone=America/Bogotá", d.Host, d.Port, d.UserDb, d.DbName, d.Password)
+	cadena := fmt.Sprintf("host=%s port=%d user=%s password=%d dbname=%s sslmode=disable",
+		d.Host,
+		d.Port,
+		d.UserDb,
+		d.Password,
+		d.DbName,
+	)
 	return cadena
 }
 
-func LoadServiceConfig(path string) (*Config, error) {
-	var config Config
-	configFile, err := os.Open(path)
+func LoadServiceConfig(path string) (*ServiceConfigs, error) {
+	configs := &ServiceConfigs{}
+	configFile, err := ioutil.ReadFile(path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Error al leer el archivo de configuraciones: %s", err.Error())
 	}
-	defer configFile.Close()
-	jsonParser := json.NewDecoder(configFile)
-	jsonParser.Decode(&config)
-	return &config, nil
+	if err := json.Unmarshal(configFile, &configs); err != nil {
+		return nil, fmt.Errorf("Error al convertir el archivo de configuraciones: %s", err.Error())
+	}
+	return configs, nil
+}
+
+func LoadDbConfig(path string) (*DbConfigs, error) {
+	config := &DbConfigs{}
+	configFile, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("Error al leer el archivo de configuraciones: %s", err.Error())
+	}
+	if err := json.Unmarshal(configFile, &config); err != nil {
+		return nil, fmt.Errorf("Error al convertir el archivo de configuraciones: %s", err.Error())
+	}
+	return config, nil
 }

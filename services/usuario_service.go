@@ -4,8 +4,8 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/Diegolopez-ing/api_rest/models"
-	"github.com/Diegolopez-ing/api_rest/repos"
+	"github.com/DiegoLopez-ing/api_rest/models"
+	"github.com/DiegoLopez-ing/api_rest/repos"
 )
 
 type UsuarioService struct {

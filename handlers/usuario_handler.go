@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"github.com/Diegolopez-ing/api_rest/errores"
-	"github.com/Diegolopez-ing/api_rest/models"
-	"github.com/Diegolopez-ing/api_rest/services"
-	"github.com/Diegolopez-ing/api_rest/utils"
-	"github.com/labstack/echo"
+	"github.com/DiegoLopez-ing/api_rest/errores"
+	"github.com/DiegoLopez-ing/api_rest/models"
+	"github.com/DiegoLopez-ing/api_rest/services"
+	"github.com/DiegoLopez-ing/api_rest/utils"
+	"github.com/labstack/echo/v4"
 )
 
 type UsuarioHandler struct {
@@ -30,4 +30,9 @@ func (handler *UsuarioHandler) LogginHandler(c echo.Context) error {
 		return errores.GenErrResposeEcho(err, c)
 	}
 	return utils.OkResponse(c, usuario)
+}
+
+func (handler *UsuarioHandler) FindAll(c echo.Context) error {
+
+	return utils.OkResponse(c, "Todo estuvo Bien")
 }
